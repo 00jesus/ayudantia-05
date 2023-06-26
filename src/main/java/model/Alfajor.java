@@ -1,3 +1,5 @@
+package model;
+
 public class Alfajor {
     private String nombre;
     private int precio;
@@ -37,7 +39,7 @@ public class Alfajor {
 
     @Override
     public String toString() {
-        return "Alfajor{" +
+        return "productos.Alfajor{" +
                 "nombre='" + nombre + '\'' +
                 ", precio=" + precio +
                 ", categoria='" + categoria + '\'' +

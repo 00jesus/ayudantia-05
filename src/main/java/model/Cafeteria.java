@@ -1,17 +1,20 @@
+package model;
+
 import java.util.ArrayList;
 import java.util.Locale;
 
 public class Cafeteria {
     private String nombre;
     private String direccion;
-    public ArrayList<Cliente> listaClientes;
-    public ArrayList<Trabajador> listaTrabajadores;
-    public ArrayList<Cafe> listaCafes;
-    public ArrayList<Alfajor> listaAlfajores;
-    public ArrayList<Te> listaTes;
+    private ArrayList<Cliente> listaClientes;
+    private ArrayList<Trabajador> listaTrabajadores;
+    private ArrayList<Cafe> listaCafes;
+    private ArrayList<Alfajor> listaAlfajores;
+    private ArrayList<Te> listaTes;
+    private ArrayList<Venta> listaVentas;
 
 
-    public Cafeteria(String nombre, String direccion, ArrayList<Cliente> clientes, ArrayList<Trabajador> trabajadores, ArrayList<Cafe> cafes, ArrayList<Alfajor> alfajores, ArrayList<Te> tes) {
+    public Cafeteria(String nombre, String direccion, ArrayList<Cliente> clientes, ArrayList<Trabajador> trabajadores, ArrayList<Cafe> cafes, ArrayList<Alfajor> alfajores, ArrayList<Te> tes, ArrayList<Venta> ventas) {
         this.nombre = nombre;
         this.direccion = direccion;
         this.listaClientes = clientes;
@@ -19,6 +22,7 @@ public class Cafeteria {
         this.listaCafes = cafes;
         this.listaAlfajores = alfajores;
         this.listaTes = tes;
+        this.listaVentas = ventas;
     }
     public Cafeteria (){
     }
@@ -49,6 +53,14 @@ public class Cafeteria {
         System.out.println("no esta ese cafe");
         return null;
     }
+
+    public Venta crearVentaCafe (Cliente cliente, Cafe cafe) {
+        Venta venta = null;
+        if (venderCafe(cliente, cafe)) {
+            venta = new Venta(cliente.getNombre(), cafe.getNombre(), String.valueOf(cafe.getPrecio()));
+        }
+        return venta;
+    }
     public boolean venderCafe (Cliente client, Cafe caf) {
         int disponible = client.getBilletera();
         int costo = caf.getPrecio();
@@ -62,6 +74,13 @@ public class Cafeteria {
             return true;
         }
     }
+    public Venta crearVentaAlfajor (Cliente cliente, Alfajor alfajor) {
+        Venta venta = null;
+        if (venderAlfajor(cliente, alfajor)) {
+            venta = new Venta(cliente.getNombre(), alfajor.getNombre(), String.valueOf(alfajor.getPrecio()) );
+        }
+        return venta;
+    }
     public boolean venderAlfajor(Cliente client, Alfajor alfajor) {
         int disponible = client.getBilletera();
         int costo = alfajor.getPrecio();
@@ -74,6 +93,13 @@ public class Cafeteria {
             System.out.println("Usted tenia: "+ disponible + " y gasto: "+costo+" pesos. Le quedan: "+ diferencia);
             return true;
         }
+    }
+    public Venta crearVentaTe (Cliente cliente, Te te) {
+        Venta venta = null;
+        if (venderTe(cliente, te)) {
+            venta = new Venta(cliente.getNombre(), te.getNombre(), String.valueOf(te.getPrecio()) );
+        }
+        return venta;
     }
     public boolean venderTe(Cliente client, Te te) {
         int disponible = client.getBilletera();
@@ -92,7 +118,7 @@ public class Cafeteria {
             if (cli.getNombre().toLowerCase(Locale.ROOT).equals(nombre.toLowerCase(Locale.ROOT))) {
                 return cli;
             }else {
-                System.out.println("no se encoontro cliente");
+                System.out.println("no se encontro cliente");
             }
         }
         return null;
@@ -184,9 +210,17 @@ public class Cafeteria {
         this.listaTes = listaTes;
     }
 
+    public ArrayList<Venta> getListaVentas() {
+        return listaVentas;
+    }
+
+    public void setListaVentas(ArrayList<Venta> listaVentas) {
+        this.listaVentas = listaVentas;
+    }
+
     @Override
     public String toString() {
-        return "Cafeteria{" +
+        return "model.Cafeteria{" +
                 "nombre='" + nombre + '\'' +
                 ", direccion='" + direccion + '\'' +
                 ", listaClientes=" + listaClientes +
