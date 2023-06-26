@@ -1,0 +1,4 @@
+juan, cafe, 3000
+carlo, cafe, 2000
+jose, alfajor, 4500
+dania, Arabigo, 4000

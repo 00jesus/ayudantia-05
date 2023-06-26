@@ -1,4 +1,6 @@
-class Cliente {
+package model;
+
+public class Cliente {
     private String nombre;
     private int billetera;
 
@@ -31,7 +33,7 @@ class Cliente {
 
     @Override
     public String toString() {
-        return "Cliente{" +
+        return "model.Cliente{" +
                 "nombre='" + nombre + '\'' +
                 ", billetera=" + billetera +
                 '}';
